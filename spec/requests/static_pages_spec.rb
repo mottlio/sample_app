@@ -16,7 +16,7 @@ subject { page }
   describe "Home page" do
     before {visit root_path}
 
-     let(:heading) { 'Sample App'}
+     let(:heading) { 'Tango Lingo'}
      let(:page_title) {''}
      it_should_behave_like "all static pages"
 
