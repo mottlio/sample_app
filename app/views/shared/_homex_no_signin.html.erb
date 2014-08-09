@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+  <meta charset="utf-8">
+  <title>Bootstrap 3, from LayoutIt!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+  <!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+  <!--script src="js/less-1.3.3.min.js"></script-->
+  <!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <![endif]-->
+
+  <!-- Fav and touch icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" href="img/favicon.png">
+
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
+
+<style>
+
+  .container {
+      margin-top: 30px;
+  }
+
+
+  .jumbotron {
+      margin-bottom: 40px;
+  }
+
+
+    body{background: #eee url(http://subtlepatterns.com/patterns/sativa.png);}
+    html,body{
+        position: relative;
+        height: 100%;
+    }
+   table {
+       margin-top: 50px;
+   }
+
+    .login-container{
+        position: relative;
+        width: 300px;
+        margin: 80px auto;
+        padding: 20px 40px 40px;
+        text-align: center;
+        background: #fff;
+        border: 1px solid #ccc;
+    }
+
+    #output{
+        position: absolute;
+        width: 300px;
+        top: -75px;
+        left: 0;
+        color: #fff;
+    }
+
+    #output.alert-success{
+        background: rgb(25, 204, 25);
+    }
+
+    #output.alert-danger{
+        background: rgb(228, 105, 105);
+    }
+
+
+    .login-container::before,.login-container::after{
+        content: "";
+        position: absolute;
+        width: 100%;height: 100%;
+        top: 3.5px;left: 0;
+        background: #fff;
+        z-index: -1;
+        -webkit-transform: rotateZ(4deg);
+        -moz-transform: rotateZ(4deg);
+        -ms-transform: rotateZ(4deg);
+        border: 1px solid #ccc;
+
+    }
+
+    .login-container::after{
+        top: 5px;
+        z-index: -2;
+        -webkit-transform: rotateZ(-2deg);
+        -moz-transform: rotateZ(-2deg);
+        -ms-transform: rotateZ(-2deg);
+
+    }
+
+    .avatar{
+        width: 100px;height: 100px;
+        margin: 10px auto 30px;
+        border-radius: 100%;
+        border: 2px solid #aaa;
+        background-size: cover;
+    }
+
+    .form-box input{
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        height:40px;
+        border: 1px solid #ccc;;
+        background: #fafafa;
+        transition:0.2s ease-in-out;
+
+    }
+
+    .form-box input:focus{
+        outline: 0;
+        background: #eee;
+    }
+
+    .form-box input[type="text"]{
+        border-radius: 5px 5px 0 0;
+        text-transform: lowercase;
+    }
+
+    .form-box input[type="password"]{
+        border-radius: 0 0 5px 5px;
+        border-top: 0;
+    }
+
+    .form-box button.login{
+        margin-top:15px;
+        padding: 10px 20px;
+    }
+
+    .animated {
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+
+    @-webkit-keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            -webkit-transform: translateY(20px);
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            -webkit-transform: translateY(20px);
+            -ms-transform: translateY(20px);
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            -ms-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    .fadeInUp {
+        -webkit-animation-name: fadeInUp;
+        animation-name: fadeInUp;
+    }
+
+</style>
+
+
+<script>
+    $(function(){
+        var textfield = $("input[name=user]");
+        $('button[type="submit"]').click(function(e) {
+            e.preventDefault();
+            //little validation just to check username
+            if (textfield.val() != "") {
+                //$("body").scrollTo("#output");
+                $("#output").addClass("alert alert-success animated fadeInUp").html("Welcome back " + "<span style='text-transform:uppercase'>" + textfield.val() + "</span>");
+                $("#output").removeClass(' alert-danger');
+                $("input").css({
+                    "height":"0",
+                    "padding":"0",
+                    "margin":"0",
+                    "opacity":"0"
+                });
+                //change button text
+                $('button[type="submit"]').html("continue")
+                        .removeClass("btn-info")
+                        .addClass("btn-default").click(function(){
+                            $("input").css({
+                                "height":"auto",
+                                "padding":"10px",
+                                "opacity":"1"
+                            }).val("");
+                        });
+
+                //show avatar
+                $(".avatar").css({
+                    "background-image": "url('http://api.randomuser.me/0.3.2/portraits/women/35.jpg')"
+                });
+            } else {
+                //remove success mesage replaced with error message
+                $("#output").removeClass(' alert alert-success');
+                $("#output").addClass("alert alert-danger animated fadeInUp").html("sorry enter a username ");
+            }
+            //console.log(textfield.val());
+
+        });
+    });
+
+
+</script>
+
+
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-md-12 column">
+      <div class="carousel slide" id="carousel-271490">
+        <ol class="carousel-indicators">
+          <li class="active" data-slide-to="0" data-target="#carousel-271490">
+          </li>
+          <li data-slide-to="1" data-target="#carousel-271490">
+          </li>
+          <li data-slide-to="2" data-target="#carousel-271490">
+          </li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="item active">
+            <img alt="" src="http://lorempixel.com/1600/500/sports/1" />
+            <div class="carousel-caption">
+              <h4>
+                Arbil (24) from Mumbai, India
+              </h4>
+              <p>
+                Arbil is a semi-professional cricket player by day. Did you know that he's also an awesome language teacher. Learn Hindi with Arbil and find out!
+              </p>
+            </div>
+          </div>
+          <div class="item">
+            <img alt="" src="http://lorempixel.com/1600/500/sports/2" />
+            <div class="carousel-caption">
+              <h4>
+                Sean (26) from Auckland, New Zealand
+              </h4>
+              <p>
+                Sean's true love are the waves. When he gets of his board you can meet him at Tango Lingo. He'll help you navigate through English vocab like no other. Who knows, maybe he'll also teach you a thing or two about surfing?
+              </p>
+            </div>
+          </div>
+          <div class="item">
+            <img alt="" src="http://lorempixel.com/1600/500/sports/3" />
+            <div class="carousel-caption">
+              <h4>
+                Jurgen (32) from Aachen, Germany
+              </h4>
+              <p>
+               Sprichst du Deutsch? If not, no problem. Jurgen, a semi-professional bike racer, will be happy to climb the peaks of German grammar with you. Are you up for the challenge? Es geht los!
+              </p>
+            </div>
+          </div>
+        </div> <a class="left carousel-control" href="#carousel-271490" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-271490" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-md-12 column">
+      <div class="jumbotron">
+        <h1>
+          Welcome to Tango Lingo!
+        </h1>
+        <p>
+          We'll set you up with a new language tutor and have you chatting away in a foreign language in no time. We bring together those wishing to teach and those eager to learn. Dive in, we're sure you'll meet someone interesting to practice your language skills with :)
+        </p>
+        <p>
+          <%= link_to "Learn more", about_path, class: "btn btn-primary btn-large" %>
+          <%= link_to "Sign up now!",   signup_path, class: "btn btn-large btn-primary" %>
+        </p>
+      </div>
+      <a id="modal-308157" href="#modal-container-308157" role="button" class="btn" data-toggle="modal">Would you like to teach?</a>
+
+      <div class="modal fade" id="modal-container-308157" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title" id="myModalLabel">
+                Hi! Hola! Hallo! Czesc!
+              </h4>
+            </div>
+
+            <div class="modal-body">
+              We're happy you want to teach with TangoLingo! This option will be available soon.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th>
+            #
+          </th>
+          <th>
+            Product
+          </th>
+          <th>
+            Payment Taken
+          </th>
+          <th>
+            Status
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            1
+          </td>
+          <td>
+            TB - Monthly
+          </td>
+          <td>
+            01/04/2012
+          </td>
+          <td>
+            Default
+          </td>
+        </tr>
+        <tr class="active">
+          <td>
+            1
+          </td>
+          <td>
+            TB - Monthly
+          </td>
+          <td>
+            01/04/2012
+          </td>
+          <td>
+            Approved
+          </td>
+        </tr>
+        <tr class="success">
+          <td>
+            2
+          </td>
+          <td>
+            TB - Monthly
+          </td>
+          <td>
+            02/04/2012
+          </td>
+          <td>
+            Declined
+          </td>
+        </tr>
+        <tr class="warning">
+          <td>
+            3
+          </td>
+          <td>
+            TB - Monthly
+          </td>
+          <td>
+            03/04/2012
+          </td>
+          <td>
+            Pending
+          </td>
+        </tr>
+        <tr class="danger">
+          <td>
+            4
+          </td>
+          <td>
+            TB - Monthly
+          </td>
+          <td>
+            04/04/2012
+          </td>
+          <td>
+            Call in to confirm
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <blockquote>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+        </p> <small>Someone famous <cite>Source Title</cite></small>
+      </blockquote>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <h2>Carousel Reviews</h2>
+    </div>
+  </div>
+
+  <div class="row clearfix">
+    <div class="col-md-4 column">
+      <h2>
+        Heading
+      </h2>
+      <p>
+        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+      </p>
+      <p>
+        <a class="btn" href="#">View details »</a>
+      </p>
+    </div>
+    <div class="col-md-4 column">
+      <h2>
+        Heading
+      </h2>
+      <p>
+        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+      </p>
+      <p>
+        <a class="btn" href="#">View details »</a>
+      </p>
+    </div>
+    <div class="col-md-4 column">
+      <h2>
+        Heading
+      </h2>
+      <p>
+        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+      </p>
+      <p>
+        <a class="btn" href="#">View details »</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,24 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <% provide(:title, 'Sign up') %>
 
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+<meta charset="utf-8">
+<title>Bootstrap 3, from LayoutIt!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+<!--script src="js/less-1.3.3.min.js"></script-->
+<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<![endif]-->
+
+<!-- Fav and touch icons -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="img/favicon.png">
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/scripts.js"></script>
+
+<style>
+
+
+    body{background: #eee url(http://subtlepatterns.com/patterns/sativa.png);}
+    html,body{
+        position: relative;
+        height: 100%;
+    }
+
+    .login-container{
+        position: relative;
+        width: 300px;
+        margin: 80px auto;
+        padding: 20px 40px 40px;
+        text-align: center;
+        background: #fff;
+        border: 1px solid #ccc;
+    }
+
+    #output{
+        position: absolute;
+        width: 300px;
+        top: -75px;
+        left: 0;
+        color: #fff;
+    }
+
+    #output.alert-success{
+        background: rgb(25, 204, 25);
+    }
+
+    #output.alert-danger{
+        background: rgb(228, 105, 105);
+    }
+
+
+    .login-container::before,.login-container::after{
+        content: "";
+        position: absolute;
+        width: 100%;height: 100%;
+        top: 3.5px;left: 0;
+        background: #fff;
+        z-index: -1;
+        -webkit-transform: rotateZ(4deg);
+        -moz-transform: rotateZ(4deg);
+        -ms-transform: rotateZ(4deg);
+        border: 1px solid #ccc;
+
+    }
+
+    .login-container::after{
+        top: 5px;
+        z-index: -2;
+        -webkit-transform: rotateZ(-2deg);
+        -moz-transform: rotateZ(-2deg);
+        -ms-transform: rotateZ(-2deg);
+
+    }
+
+    .avatar{
+        width: 100px;height: 100px;
+        margin: 10px auto 30px;
+        border-radius: 100%;
+        border: 2px solid #aaa;
+        background-size: cover;
+    }
+
+    .form-box input{
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        height:40px;
+        border: 1px solid #ccc;;
+        background: #fafafa;
+        transition:0.2s ease-in-out;
+
+    }
+
+    .form-box input:focus{
+        outline: 0;
+        background: #eee;
+    }
+
+    .form-box input[type="text"]{
+        border-radius: 5px 5px 0 0;
+        text-transform: lowercase;
+    }
+
+    .form-box input[type="password"]{
+        border-radius: 0 0 5px 5px;
+        border-top: 0;
+    }
+
+    .form-box button.login{
+        margin-top:15px;
+        padding: 10px 20px;
+    }
+
+    .animated {
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+
+    @-webkit-keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            -webkit-transform: translateY(20px);
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            -webkit-transform: translateY(20px);
+            -ms-transform: translateY(20px);
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            -ms-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    .fadeInUp {
+        -webkit-animation-name: fadeInUp;
+        animation-name: fadeInUp;
+    }
+
+</style>
+
+
+<script>
+    $(function(){
+        var textfield = $("input[name=user]");
+        $('button[type="submit"]').click(function(e) {
+            e.preventDefault();
+            //little validation just to check username
+            if (textfield.val() != "") {
+                //$("body").scrollTo("#output");
+                $("#output").addClass("alert alert-success animated fadeInUp").html("Welcome back " + "<span style='text-transform:uppercase'>" + textfield.val() + "</span>");
+                $("#output").removeClass(' alert-danger');
+                $("input").css({
+                    "height":"0",
+                    "padding":"0",
+                    "margin":"0",
+                    "opacity":"0"
+                });
+                //change button text
+                $('button[type="submit"]').html("continue")
+                        .removeClass("btn-info")
+                        .addClass("btn-default").click(function(){
+                            $("input").css({
+                                "height":"auto",
+                                "padding":"10px",
+                                "opacity":"1"
+                            }).val("");
+                        });
+
+                //show avatar
+                $(".avatar").css({
+                    "background-image": "url('http://api.randomuser.me/0.3.2/portraits/women/35.jpg')"
+                });
+            } else {
+                //remove success mesage replaced with error message
+                $("#output").removeClass(' alert alert-success');
+                $("#output").addClass("alert alert-danger animated fadeInUp").html("sorry enter a username ");
+            }
+            //console.log(textfield.val());
+
+        });
+    });
+
+
+</script>
+
+
+
+</head>
+
+<body>
+
 <h1>Sign up</h1>
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
-    <%= render "shared/error_messages", object: f.object %>
 
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+<div class="container">
+  <div class="login-container">
+    <div id="output"></div>
+    <div class="avatar"></div>
 
-      <%= f.label :email %>
-      <%= f.text_field :email %>
+    <div class="form-box">
+      <%= form_for(@user) do |f| %>
+          <%= render "shared/error_messages", object: f.object %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+          <%= f.label :name %>
+          <%= f.text_field :name %>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation %>
+          <%= f.label :email %>
+          <%= f.text_field :email %>
 
-      <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
-    <% end %>
+          <%= f.label :password %>
+          <%= f.password_field :password %>
+
+          <%= f.label :password_confirmation, "Confirmation" %>
+          <%= f.password_field :password_confirmation %>
+
+          <%= f.submit "Create my account", class: "btn btn-info btn-block login" %>
+      <% end %>
+    </div>
+
   </div>
+
 </div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

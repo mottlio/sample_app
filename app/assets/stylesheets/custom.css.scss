@@ -3,6 +3,7 @@
 $lightGray: #999;
 
 
+
 /* universal */
 
 html {
@@ -131,6 +132,12 @@ $grayMediumLight: #eaeaea;
 	width: 100%;
 	margin-top: 45px;
 	@include box_sizing;
+
+}
+
+iframe {
+
+  border: 10px solid rgb(128, 128, 128);
 
 }
 
